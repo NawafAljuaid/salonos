@@ -133,3 +133,22 @@ A 14-day free trial is available on all plans.
 - Arabic = RTL (right to left) layout
 - English = LTR (left to right) layout
 - Bilingual fields stored as: name_en / name_ar
+
+## Data Management & Deletion Policy
+
+### Soft Delete Pattern
+All deletions use soft delete — data is never immediately removed.
+- `deleted_at` timestamp marks when deletion was requested
+- `is_active = false` hides the record from the application
+- Hard delete only happens after 30-day grace period
+
+### Tenant Deletion Flow
+1. Export data offered (customers, appointments, payments)
+2. Account suspended immediately
+3. 30-day grace period for recovery
+4. Permanent deletion after 30 days
+
+### Who Can Delete
+- **SaaS Admin (us):** Can suspend/delete any tenant (abuse, non-payment)
+- **Tenant Owner:** Can delete their own account only
+- **Staff:** Cannot delete the account
