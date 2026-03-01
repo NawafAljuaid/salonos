@@ -12,6 +12,7 @@ validateEnv()
 
 // Initialize database connection
 const supabase = require('./config/supabase')
+const routes = require('./routes/index') 
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -25,12 +26,15 @@ app.use(cors({
 }))
 app.use(express.json())
 
-// ─── Health Check ─────────────────────────────────────
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    message: 'SalonOS API is running',
-    timestamp: new Date().toISOString()
+// ─── API Routes ───────────────────────────────────────
+app.use('/api', routes)
+
+
+// ─── 404 Handler ──────────────────────────────────────
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`
   })
 })
 
