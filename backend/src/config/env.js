@@ -5,7 +5,9 @@
 const requiredEnvVars = [
   'SUPABASE_URL',
   'SUPABASE_ANON_KEY',
-  'PORT'
+  'PORT',
+  'JWT_SECRET',
+  'JWT_EXPIRES_IN'
 ]
 
 const validateEnv = () => {

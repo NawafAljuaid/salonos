@@ -8,11 +8,11 @@ const router = express.Router()
 const customerRoutes = require('./customer.routes')
 // Future routes go here:
 // const appointmentRoutes = require('./appointment.routes')
-// const authRoutes = require('./auth.routes')
+const authRoutes = require('./auth.routes')
 
 router.use('/customers', customerRoutes)
 // Future routes:
 // router.use('/appointments', appointmentRoutes)
-// router.use('/auth', authRoutes)
+router.use('/auth', authRoutes)
 
 module.exports = router
