@@ -9,10 +9,12 @@ const customerRoutes = require('./customer.routes')
 // Future routes go here:
 // const appointmentRoutes = require('./appointment.routes')
 const authRoutes = require('./auth.routes')
-
+router.use('/auth', authRoutes)
 router.use('/customers', customerRoutes)
 // Future routes:
 // router.use('/appointments', appointmentRoutes)
-router.use('/auth', authRoutes)
+const serviceRoutes  = require('./service.routes')
+router.use('/services',  serviceRoutes)
+
 
 module.exports = router
