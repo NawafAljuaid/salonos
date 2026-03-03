@@ -11,10 +11,13 @@ appointmentRoutes = require('./appointment.routes')
 const authRoutes = require('./auth.routes')
 router.use('/auth', authRoutes)
 router.use('/customers', customerRoutes)
+const paymentRoutes     = require('./payment.routes')
+
 // Future routes:
 router.use('/appointments', appointmentRoutes)
 const serviceRoutes  = require('./service.routes')
 router.use('/services',  serviceRoutes)
+router.use('/payments',     paymentRoutes)
 
 
 module.exports = router
