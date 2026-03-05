@@ -1,11 +1,35 @@
-function App() {
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import { useAuth } from './context/useAuth'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+
+// Protected route — redirects to login if not authenticated
+function ProtectedRoute({ children }) {
+  const { user } = useAuth()
+  return user ? children : <Navigate to="/login" />
+}
+
+function AppRoutes() {
   return (
-    <div className="min-h-screen bg-purple-600 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-white">
-        SalonOS is alive! 🚀
-      </h1>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      } />
+      <Route path="*" element={<Navigate to="/login" />} />
+    </Routes>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
+  )
+}
